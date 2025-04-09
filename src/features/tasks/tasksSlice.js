@@ -48,7 +48,18 @@ export const tasksSlice = createSlice({
       },
     ],
   },
-  reducers: {},
+  reducers: {
+    statusButtonPressed: (state, action) => {
+      state.tasks.forEach((taskGroup) =>
+        taskGroup.taskList.forEach((task) => {
+          if (task.taskId === action.payload) {
+            task.status = task.status === "Completed" ? "Pending" : "Completed";
+          }
+        })
+      );
+    },
+  },
 });
+export const { statusButtonPressed } = tasksSlice.actions;
 
 export default tasksSlice.reducer;
